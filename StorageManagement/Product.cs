@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Data.SqlClient;
 
 namespace StorageManagement
 {
@@ -16,5 +12,37 @@ namespace StorageManagement
         public int? CalcStore { get; set; }
 
         string connectionString = "Data Source=LOCALHOST;Initial Catalog=\"Storage Management\";Integrated Security=True";
+
+        public List<Product> GetProduct()
+        {
+            List<Product> ProductList = new List<Product>();
+
+            SqlConnection con = new SqlConnection(connectionString);
+
+            string selectSQL = "SELECT Id, ProdCode, Description, Location, Storage, CalcStock FROM Storage Management";
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(selectSQL, con);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr != null)
+            {
+                while (dr.Read())
+                {
+                    Product product = new Product();
+
+                    product.Id = Convert.ToInt32(dr["Id"]);
+                    product.ProdCode = dr["ProdCode"].ToString();
+                    product.Description = dr["Description"].ToString();
+                    product.Location = dr["Location"].ToString();
+                    product.Storage = dr["Storage"].ToString();
+                    product.CalcStore = Convert.ToInt32(dr["CalcStock"]);
+
+                    ProductList.Add(product);
+                }
+            }
+            return ProductList;
+        }
     }
 }
