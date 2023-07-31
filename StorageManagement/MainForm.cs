@@ -20,5 +20,16 @@ namespace StorageManagement
 
             dataGridViewProduct.DataSource = productsList;
         }
+
+        private void buttonNewProduct_Click(object sender, EventArgs e)
+        {
+            NewProductForm formNewProduct = new NewProductForm();
+            formNewProduct.ShowDialog();
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            FillGridView();
+        }
     }
 }

@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	<Authors>Ferran Badia Valls</Authors>
+	<Copyright>Ferran Badia Valls 2023</Copyright>
+	<Version>1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

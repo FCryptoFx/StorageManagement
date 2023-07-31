@@ -29,32 +29,45 @@
         private void InitializeComponent()
         {
             dataGridViewProduct = new DataGridView();
+            buttonNewProduct = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduct).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewProduct
             // 
             dataGridViewProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProduct.Location = new Point(43, 27);
-            dataGridViewProduct.Name = "dataGridView1";
+            dataGridViewProduct.Name = "dataGridViewProduct";
             dataGridViewProduct.RowTemplate.Height = 25;
             dataGridViewProduct.Size = new Size(711, 353);
             dataGridViewProduct.TabIndex = 0;
             // 
-            // Form1
+            // buttonNewProduct
+            // 
+            buttonNewProduct.Location = new Point(665, 386);
+            buttonNewProduct.Name = "buttonNewProduct";
+            buttonNewProduct.Size = new Size(89, 23);
+            buttonNewProduct.TabIndex = 1;
+            buttonNewProduct.Text = "Añadir";
+            buttonNewProduct.UseVisualStyleBackColor = true;
+            buttonNewProduct.Click += buttonNewProduct_Click;
+            // 
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonNewProduct);
             Controls.Add(dataGridViewProduct);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "MainForm";
+            Text = "Storage Management";
+            Activated += MainForm_Activated;
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduct).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
         private DataGridView dataGridViewProduct;
+        private Button buttonNewProduct;
     }
 }

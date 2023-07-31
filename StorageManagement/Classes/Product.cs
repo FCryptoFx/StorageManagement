@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace StorageManagement.Classes
 {
@@ -9,7 +10,7 @@ namespace StorageManagement.Classes
         public string? Description { get; set; }
         public string? Location { get; set; }
         public string? Storage { get; set; }
-        public int? CalcStore { get; set; }
+        public int? CalcStock { get; set; }
 
         string connectionString = "Data Source=KH006;Initial Catalog=StorageManagement;Integrated Security=True; Encrypt=False";
 
@@ -37,12 +38,32 @@ namespace StorageManagement.Classes
                     product.Description = dr["Description"].ToString();
                     product.Location = dr["Location"].ToString();
                     product.Storage = dr["Storage"].ToString();
-                    product.CalcStore = Convert.ToInt32(dr["CalcStock"]);
+                    product.CalcStock = Convert.ToInt32(dr["CalcStock"]);
 
                     ProductList.Add(product);
                 }
             }
             return ProductList;
+        }
+
+        public void CreateProduct(Product product)
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+
+            string insertSQL = "INSERT INTO Product (ProdCode, Description, Location, Storage, CalcStock) " +
+                                "VALUES (@ProdCode, @Description, @Location, @Storage, @CalcStock)";
+
+            using (SqlCommand cmd = new SqlCommand(insertSQL, con))
+            {
+                cmd.Parameters.AddWithValue("@ProdCode", product.ProdCode);
+                cmd.Parameters.AddWithValue("@Description", product.Description);
+                cmd.Parameters.AddWithValue("@Location", product.Location);
+                cmd.Parameters.AddWithValue("@Storage", product.Storage);
+                cmd.Parameters.AddWithValue("@CalcStock", product.CalcStock);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
