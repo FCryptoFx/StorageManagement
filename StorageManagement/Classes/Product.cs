@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace StorageManagement
+namespace StorageManagement.Classes
 {
     public class Product
     {
@@ -11,7 +11,7 @@ namespace StorageManagement
         public string? Storage { get; set; }
         public int? CalcStore { get; set; }
 
-        string connectionString = "Data Source=LOCALHOST;Initial Catalog=\"Storage Management\";Integrated Security=True";
+        string connectionString = "Data Source=KH006;Initial Catalog=StorageManagement;Integrated Security=True; Encrypt=False";
 
         public List<Product> GetProduct()
         {
@@ -19,7 +19,7 @@ namespace StorageManagement
 
             SqlConnection con = new SqlConnection(connectionString);
 
-            string selectSQL = "SELECT Id, ProdCode, Description, Location, Storage, CalcStock FROM Storage Management";
+            string selectSQL = "SELECT Id, ProdCode, Description, Location, Storage, CalcStock FROM Product";
             con.Open();
 
             SqlCommand cmd = new SqlCommand(selectSQL, con);
